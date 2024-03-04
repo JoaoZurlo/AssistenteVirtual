@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f187662f-757d-4ef0-9c99-af14a5271664" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/models/speech_emotion_recognition.hdf5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/triste.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assistente.py" beforeDir="false" afterPath="$PROJECT_DIR$/Assistente.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/campo _agenda.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/campo _agenda.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/comandos_respostas.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/comandos_respostas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agenda.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/agenda.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +64,7 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\jzurlo\Downloads\Curso IA\Pycharm\Assistente_Virtual" />
+      <recent name="C:\Users\jzurlo\Downloads\Curso IA\Pycharm\Assistente_Virtual\models" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jzurlo\Downloads\Curso IA\Pycharm\Assistente_Virtual" />
