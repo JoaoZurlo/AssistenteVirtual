@@ -56,7 +56,9 @@ def predict_sound(AUDIO, SAMPLE_PATE, plot = True):
     clip, index = librosa.effects.trim(wav_data, top_db=60, frame_length=512, hop_length=64)
     splitted_audio_data = tf.signal.frame(clip, sample_rate, sample_rate, pad_end=True, pad_value=0)
     for i, data in enumerate(splitted_audio_data.numpy()):
-        print('Audio')
+        print('Audio split: ', i)
+        print(data)
+        print(data.shape)
 
 
 

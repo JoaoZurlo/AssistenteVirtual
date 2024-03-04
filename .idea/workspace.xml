@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f187662f-757d-4ef0-9c99-af14a5271664" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/models/speech_emotion_recognition.hdf5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/triste.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assistente.py" beforeDir="false" afterPath="$PROJECT_DIR$/Assistente.py" afterDir="false" />
     </list>
