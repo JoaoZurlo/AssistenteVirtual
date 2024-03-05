@@ -48,19 +48,34 @@ def load_model_by_name(model_type):
 model_type = 'EMOÇÃO'
 loaded_model = load_model_by_name(model_type)
 
-def predict_sound(AUDIO, SAMPLE_PATE, plot = True):
+def predict_sound(AUDIO, SAMPLE_RATE, plot = True):
     results = []
-    wav_data, sample_rate = librosa.load(AUDIO, sr=SAMPLE_PATE)
+    wav_data, sample_rate = librosa.load(AUDIO, sr=SAMPLE_RATE)
     #print(wav_data)
     #print(wav_data.shape)
     clip, index = librosa.effects.trim(wav_data, top_db=60, frame_length=512, hop_length=64)
     splitted_audio_data = tf.signal.frame(clip, sample_rate, sample_rate, pad_end=True, pad_value=0)
     for i, data in enumerate(splitted_audio_data.numpy()):
-        print('Audio split: ', i)
-        print(data)
-        print(data.shape)
+        #print('Audio split: ', i)
+        #print(data)
+        #print(data.shape)
+        mfccs_features = librosa.feature.mfcc(y = data, sr = sample_rate, n_mfcc=48)
+        #print(mfccs_features.shape)
+        #print(mfccs_features)
+        mfccs_scalad_features = np.mean(mfccs_features.T, axis = 0)
+        mfccs_scalad_features = mfccs_scalad_features.reshape(1, -1)
+        #print(mfccs_scalad_features.shape)
+        mfccs_scalad_features = mfccs_scalad_features[:,:,np.newaxis]
+        #print(mfccs_scalad_features.shape)
 
-
-
+        predictions = loaded_model[0].predict(mfccs_scalad_features, batch_size=32)
+        print(predictions)
+        print(predictions.sum())
 
 predict_sound('triste.wav', loaded_model[2], plot=True)
+
+
+
+
+
+
