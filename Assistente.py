@@ -74,19 +74,65 @@ def predict_sound(AUDIO, SAMPLE_RATE, plot=True):
         # print(mfccs_scalad_features.shape)
 
         predictions = loaded_model[0].predict(mfccs_scalad_features, batch_size=32)
-        print(predictions)
-        #print(predictions.sum())
+        # print(predictions)
+        # print(predictions.sum())
         if plot:
             plt.figure(figsize=(len(splitted_audio_data), 5))
             plt.barh(loaded_model[1], predictions[0])
             plt.tight_layout()
             plt.show()
 
-        predictions = predictions.argmax(axis= 1)
-        print(predictions)
+        predictions = predictions.argmax(axis=1)
+        # print(predictions)
         predictions = predictions.astype(int).flatten()
         predictions = loaded_model[1][predictions[0]]
         results.append(predictions)
-        print(results)
+        # print(results)
 
-predict_sound('triste.wav', loaded_model[2], plot=True)
+        result_str = 'PARTE' + str(1) + ': ' + str(predictions).upper()
+        # print(result_str)
+
+    count_resuts = [[results.count(x), x] for x in set(results)]
+    # print(count_resuts)
+
+    print(max(count_resuts))
+    return max(count_resuts)
+
+
+#predict_sound('triste.wav', loaded_model[2], plot=True)  # caso nao queira ver o grafico colocar false
+
+def play_music_youtube(emocao):
+    play = False
+    if emocao == 'triste' or emocao == 'medo':
+        wb.get(chrome_path).open('https://youtu.be/KWjV25q34Hw')
+        play = True
+
+    if emocao == 'nervosa' or emocao == 'surpreso':
+        wb.get(chrome_path).open('https://youtu.be/EqPyyh9x88A')
+        play = True
+
+    return play
+
+
+#play_music_youtube('triste')
+#emocao = predict_sound('triste.wav', loaded_model[2], plot=True)
+#print(emocao)
+#play_music_youtube(emocao[1])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
