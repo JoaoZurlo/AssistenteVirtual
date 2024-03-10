@@ -1,6 +1,12 @@
 import datetime
 
 import matplotlib.pyplot as plt
+import pyttsx3
+import speech_recognition
+from django.conf.locale import sr
+from playsound import playsound
+import pygame
+
 
 hour = datetime.datetime.now().strftime('%H:%M')
 print(hour)
@@ -14,7 +20,7 @@ import tensorflow as tf
 import numpy as np
 import librosa
 import seaborn as sns
-
+import speech_recognition as sr
 sns.set()
 from modules import comandos_respostas
 
@@ -23,7 +29,7 @@ resposta = comandos_respostas.respostas
 # print(comandos)
 # print(resposta)
 
-meu_nome = 'TechZurlo'
+meu_nome = 'Teste'
 
 chrome_path = 'C:/Program Files/Google/Chrome/Application/chrome.exe %s'
 
@@ -99,7 +105,7 @@ def predict_sound(AUDIO, SAMPLE_RATE, plot=True):
     return max(count_resuts)
 
 
-#predict_sound('triste.wav', loaded_model[2], plot=True)  # caso nao queira ver o grafico colocar false
+# predict_sound('triste.wav', loaded_model[2], plot=True)  # caso nao queira ver o grafico colocar false
 
 def play_music_youtube(emocao):
     play = False
@@ -114,20 +120,76 @@ def play_music_youtube(emocao):
     return play
 
 
-#play_music_youtube('triste')
-#emocao = predict_sound('triste.wav', loaded_model[2], plot=True)
-#print(emocao)
-#play_music_youtube(emocao[1])
+# play_music_youtube('triste')
+# emocao = predict_sound('triste.wav', loaded_model[2], plot=True)
+# print(emocao)
+# play_music_youtube(emocao[1])
+
+def speak(audio):
+    engine = pyttsx3.init()
+    engine.setProperty('rate', 190) #controla a velocidade de reprodução da assistente
+    engine.setProperty('volume', 1)  # valor min=0, max=1
+    engine.say(audio)
+    engine.runAndWait()
 
 
+#speak('Testando o sintetizador de voz da assistente')
+
+def listen_microphone():
+    microfone = sr.Recognizer()
+    with sr.Microphone() as source:
+        microfone.adjust_for_ambient_noise(source, duration=0.8)
+        print('Ouvindo: ')
+        audio = microfone.listen(source)
+        with open('recordings/speach.wav', 'wb') as f:
+            f.write(audio.get_wav_data())
 
 
+        try:
+            frase = microfone.recognize_google(audio, language='pt-BR')
+            print('Você disse: ' + frase)
+        except speech_recognition.UnknownValueError:
+          frase = ''
+          print('Não entendi')
+        return frase
 
+#listen_microphone()
 
+def test_modal():
+    audio_source = 'C:/Users/jzurlo/Downloads/Curso IA\Pycharm/Assistente_Virtual/recordings/speach.wav'
+    prediction = predict_sound(audio_source, loaded_model[2], plot=True)
+    return prediction
 
+#print(test_modal())
 
+paying = False
+mode_control = False
 
+print('[INFO] Pronto para começar!')
+pygame.mixer.init()
 
+# Carrega e reproduz o arquivo MP3
+pygame.mixer.music.load("n1.mp3")
+pygame.mixer.music.play()
+
+# Aguarda o final da reprodução
+pygame.mixer.init()
+
+# Carrega e reproduz o arquivo MP3
+pygame.mixer.music.load("n1.mp3")
+pygame.mixer.music.play()
+
+# Aguarda o término da reprodução
+while pygame.mixer.music.get_busy():
+    pygame.time.Clock().tick(10)
+
+while (1):
+    result = listen_microphone()
+
+    if meu_nome in result:
+        print('Acionou a assitente')
+    else:
+        playsound('n3.mp3')
 
 
 
