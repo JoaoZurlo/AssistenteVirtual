@@ -1,4 +1,5 @@
 import datetime
+import random
 
 import matplotlib.pyplot as plt
 import pyttsx3
@@ -7,6 +8,7 @@ from django.conf.locale import sr
 from playsound import playsound
 import pygame
 
+from modules.comandos_respostas import respostas
 
 hour = datetime.datetime.now().strftime('%H:%M')
 print(hour)
@@ -127,7 +129,7 @@ def play_music_youtube(emocao):
 
 def speak(audio):
     engine = pyttsx3.init()
-    engine.setProperty('rate', 190) #controla a velocidade de reprodução da assistente
+    engine.setProperty('rate', 180) #controla a velocidade de reprodução da assistente
     engine.setProperty('volume', 1)  # valor min=0, max=1
     engine.say(audio)
     engine.runAndWait()
@@ -183,13 +185,43 @@ pygame.mixer.music.play()
 while pygame.mixer.music.get_busy():
     pygame.time.Clock().tick(10)
 
+def play_sound(file_path):
+    pygame.mixer.music.load(file_path)
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
+
+def speak(audio):
+    engine = pyttsx3.init()
+    engine.setProperty('rate', 180)
+    engine.setProperty('volume', 1)
+    engine.say(audio)
+    engine.runAndWait()
+
+
+
 while (1):
     result = listen_microphone()
 
     if meu_nome in result:
-        print('Acionou a assitente')
+        result = str(result.split(meu_nome + ' ')[1])
+        result = result.lower()
+        #print('Após o processamento: ', result)
+
+        if result == 'encerrar':
+            play_sound('n2.mp3')
+            speak(''.join(random.sample(respostas[4], k=1)))
+            break
+
+
+        if result in comandos[0]:
+            play_sound('n2.mp3')
+            speak('Até agora minhas funções são: ' + respostas[0])
+
+
+
     else:
-        playsound('n3.mp3')
+        play_sound('n3.mp3')
 
 
 

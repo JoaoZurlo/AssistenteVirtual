@@ -59,7 +59,7 @@
     "Python.teste_instalacao.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Cherry-picking in main",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/jzurlo/Downloads/Curso IA/Pycharm/Assistente_Virtual",
     "run.code.analysis.last.selected.profile": "aDefault",
@@ -226,7 +226,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
