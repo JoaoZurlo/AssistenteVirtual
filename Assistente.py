@@ -29,7 +29,7 @@ resposta = comandos_respostas.respostas
 # print(comandos)
 # print(resposta)
 
-meu_nome = 'Teste'
+meu_nome = 'Ana'
 
 chrome_path = 'C:/Program Files/Google/Chrome/Application/chrome.exe %s'
 
@@ -156,7 +156,7 @@ def listen_microphone():
 #listen_microphone()
 
 def test_modal():
-    audio_source = 'C:/Users/jzurlo/Downloads/Curso IA\Pycharm/Assistente_Virtual/recordings/speach.wav'
+    audio_source = 'C:/Users/jzurlo/Downloads/Curso IA/Pycharm/Assistente_Virtual/recordings/speach.wav'
     prediction = predict_sound(audio_source, loaded_model[2], plot=True)
     return prediction
 
