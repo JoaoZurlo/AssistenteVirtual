@@ -1,13 +1,22 @@
 import datetime
 import random
-
 import matplotlib.pyplot as plt
 import pygame
 import pyttsx3
 import speech_recognition
 from django.conf.locale import sr
-
 from modules.comandos_respostas import respostas
+import webbrowser as wb
+import tensorflow as tf
+import numpy as np
+import librosa
+import seaborn as sns
+import speech_recognition as sr
+sns.set()
+from modules import comandos_respostas
+
+comandos = comandos_respostas.comandos
+resposta = comandos_respostas.respostas
 
 hour = datetime.datetime.now().strftime('%H:%M')
 print(hour)
@@ -15,19 +24,6 @@ date = datetime.date.today().strftime('%d/%B/%y')
 print(date)
 date = date.split('/')
 print(date)
-
-import webbrowser as wb
-import tensorflow as tf
-import numpy as np
-import librosa
-import seaborn as sns
-import speech_recognition as sr
-
-sns.set()
-from modules import comandos_respostas
-
-comandos = comandos_respostas.comandos
-resposta = comandos_respostas.respostas
 # print(comandos)
 # print(resposta)
 
@@ -35,15 +31,12 @@ meu_nome = 'Ana'
 
 chrome_path = 'C:/Program Files/Google/Chrome/Application/chrome.exe %s'
 
-
 def search(frase):
     wb.get(chrome_path).open('https://www.google.com/search?q=' + frase)
-
 
 # search('linguagem python')
 
 MODEL_TYPES = ['EMOÇÃO']
-
 
 def load_model_by_name(model_type):
     global model, model_dict, SAMPLE_RATE
@@ -53,13 +46,11 @@ def load_model_by_name(model_type):
         SAMPLE_RATE = 48000
     return model, model_dict, SAMPLE_RATE
 
-
 # print(load_model_by_name('EMOÇÃO'))
 # print(load_model_by_name('EMOÇÃO')[0].summary())
 
 model_type = 'EMOÇÃO'
 loaded_model = load_model_by_name(model_type)
-
 
 def predict_sound(AUDIO, SAMPLE_RATE, plot=True):
     results = []
@@ -106,7 +97,6 @@ def predict_sound(AUDIO, SAMPLE_RATE, plot=True):
     print(max(count_resuts))
     return max(count_resuts)
 
-
 # predict_sound('triste.wav', loaded_model[2], plot=True)  # caso nao queira ver o grafico colocar false
 
 def play_music_youtube(emocao):
@@ -121,7 +111,6 @@ def play_music_youtube(emocao):
 
     return play
 
-
 # play_music_youtube('triste')
 # emocao = predict_sound('triste.wav', loaded_model[2], plot=True)
 # print(emocao)
@@ -133,7 +122,6 @@ def speak(audio):
     engine.setProperty('volume', 1)  # valor min=0, max=1
     engine.say(audio)
     engine.runAndWait()
-
 
 # speak('Testando o sintetizador de voz da assistente')
 
@@ -154,15 +142,11 @@ def listen_microphone():
             print('Não entendi')
         return frase
 
-
 # listen_microphone()
-
 def test_modal():
     audio_source = 'C:/Users/jzurlo/Downloads/Curso IA/Pycharm/Assistente_Virtual/recordings/speach.wav'
     prediction = predict_sound(audio_source, loaded_model[2], plot=True)
     return prediction
-
-
 # print(test_modal())
 
 paying = False
@@ -186,13 +170,11 @@ pygame.mixer.music.play()
 while pygame.mixer.music.get_busy():
     pygame.time.Clock().tick(10)
 
-
 def play_sound(file_path):
     pygame.mixer.music.load(file_path)
     pygame.mixer.music.play()
     while pygame.mixer.music.get_busy():
         pygame.time.Clock().tick(10)
-
 
 def speak(audio):
     engine = pyttsx3.init()
@@ -200,7 +182,6 @@ def speak(audio):
     engine.setProperty('volume', 1)
     engine.say(audio)
     engine.runAndWait()
-
 
 while (1):
     result = listen_microphone()
@@ -240,12 +221,25 @@ while (1):
             else:
                 speak('Ok')
 
+        if result in comandos[2]:
+            play_sound('n2.mp3')
+            speak(''.join(random.sample(respostas[2], k=1)))
+            result = listen_microphone()
+            search(result)
+
+        if result in comandos[6]:
+            play_sound('n2.mp3')
+            if campo_agenda.campo_agenda():
+                speak('Estes são os eventos agendados para hoje:')
+                for i in range(len(campo_agenda.campo_agenda()[1])):
+                    speak(campo_agenda.campo_agenda()[1][i] + ' ' + campo_agenda.campo_agenda()[0][1] + ' Agendada para as ' + str(campo_agenda.campo_agenda()[2][i]))
+            else:
+                speak('Não há eventos agendados para hoje a partir do horário atual')
+
         if result == 'encerrar':
             play_sound('n2.mp3')
             speak(''.join(random.sample(respostas[4], k=1)))
             break
-
-
 
     else:
         play_sound('n3.mp3')
