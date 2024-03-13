@@ -14,7 +14,7 @@ comandos = [funcoes, lembretes, ajuda, horas, data, analysis_mode, agenda ]
 
 
 #Respostas
-funcionalidades = 'Gravar lembretes, fazer pesquisa no google, falar as horas, falar a dta, falar eventos agendados para o dia. Também tenho o modo de analise que, quando ativado, faço a anáçise da sua emoção baseado na sua voz'
+funcionalidades = 'Gravar lembretes, fazer pesquisa no google, falar as horas, falar a data, falar eventos agendados para o dia. Também tenho o modo de análize, que quando ativado, faço a análise da sua emoção baseado na sua voz'
 respostas_conclusão = ['Ok!', 'Concluído!', 'Feito!', 'Tudo certo', 'Terminado!', 'Perfeito!', 'Realizado!']
 perguntas = ['Como possoajudar?', 'Ok, vamos lá', 'Certo, é só falar!']
 respostas_agradecimentos = ['Se precisar é só chamar', 'Qualquer coisa estou aqui']

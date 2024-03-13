@@ -2,11 +2,10 @@ import datetime
 import random
 
 import matplotlib.pyplot as plt
+import pygame
 import pyttsx3
 import speech_recognition
 from django.conf.locale import sr
-from playsound import playsound
-import pygame
 
 from modules.comandos_respostas import respostas
 
@@ -23,6 +22,7 @@ import numpy as np
 import librosa
 import seaborn as sns
 import speech_recognition as sr
+
 sns.set()
 from modules import comandos_respostas
 
@@ -129,13 +129,13 @@ def play_music_youtube(emocao):
 
 def speak(audio):
     engine = pyttsx3.init()
-    engine.setProperty('rate', 180) #controla a velocidade de reprodução da assistente
+    engine.setProperty('rate', 180)  # controla a velocidade de reprodução da assistente
     engine.setProperty('volume', 1)  # valor min=0, max=1
     engine.say(audio)
     engine.runAndWait()
 
 
-#speak('Testando o sintetizador de voz da assistente')
+# speak('Testando o sintetizador de voz da assistente')
 
 def listen_microphone():
     microfone = sr.Recognizer()
@@ -146,23 +146,24 @@ def listen_microphone():
         with open('recordings/speach.wav', 'wb') as f:
             f.write(audio.get_wav_data())
 
-
         try:
             frase = microfone.recognize_google(audio, language='pt-BR')
             print('Você disse: ' + frase)
         except speech_recognition.UnknownValueError:
-          frase = ''
-          print('Não entendi')
+            frase = ''
+            print('Não entendi')
         return frase
 
-#listen_microphone()
+
+# listen_microphone()
 
 def test_modal():
     audio_source = 'C:/Users/jzurlo/Downloads/Curso IA/Pycharm/Assistente_Virtual/recordings/speach.wav'
     prediction = predict_sound(audio_source, loaded_model[2], plot=True)
     return prediction
 
-#print(test_modal())
+
+# print(test_modal())
 
 paying = False
 mode_control = False
@@ -185,19 +186,20 @@ pygame.mixer.music.play()
 while pygame.mixer.music.get_busy():
     pygame.time.Clock().tick(10)
 
+
 def play_sound(file_path):
     pygame.mixer.music.load(file_path)
     pygame.mixer.music.play()
     while pygame.mixer.music.get_busy():
         pygame.time.Clock().tick(10)
 
+
 def speak(audio):
     engine = pyttsx3.init()
-    engine.setProperty('rate', 180)
+    engine.setProperty('rate', 185)
     engine.setProperty('volume', 1)
     engine.say(audio)
     engine.runAndWait()
-
 
 
 while (1):
@@ -206,7 +208,37 @@ while (1):
     if meu_nome in result:
         result = str(result.split(meu_nome + ' ')[1])
         result = result.lower()
-        #print('Após o processamento: ', result)
+        # print('Após o processamento: ', result)
+
+        if result in comandos[0]:
+            play_sound('n2.mp3')
+            speak('Até agora minhas funções são: ' + respostas[0])
+
+        if result in comandos[3]:
+            play_sound('n2.mp3')
+            speak('Agora são ' + datetime.datetime.now().strftime('%H:%M'))
+
+        if result in comandos[4]:
+            play_sound('n2.mp3')
+            speak('Hoje é dia ' + date[0] + 'de' + date[1])
+
+        if result in comandos[1]:
+            play_sound('n2.mp3')
+            speak('Pode falar!')
+            result = listen_microphone()
+            anotacao = open('anotacao.txt', mode='a+', encoding='utf-8')
+            anotacao.write(result + '\n')
+            anotacao.close()
+            speak(''.join(random.sample(respostas[1], k=1)))
+            speak('Deseja que eu leia os lembretes?')
+            result = listen_microphone()
+            if result == 'sim' or result == 'pode ler':
+                with open('anotacao.txt') as file_source:
+                    lines = file_source.readline()
+                    for line in lines:
+                        speak(line)
+            else:
+                speak('Ok')
 
         if result == 'encerrar':
             play_sound('n2.mp3')
@@ -214,19 +246,6 @@ while (1):
             break
 
 
-        if result in comandos[0]:
-            play_sound('n2.mp3')
-            speak('Até agora minhas funções são: ' + respostas[0])
-
-
 
     else:
         play_sound('n3.mp3')
-
-
-
-
-
-
-
-
