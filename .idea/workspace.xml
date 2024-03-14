@@ -7,6 +7,7 @@
     <list default="true" id="f187662f-757d-4ef0-9c99-af14a5271664" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assistente.py" beforeDir="false" afterPath="$PROJECT_DIR$/Assistente.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/comandos_respostas.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/comandos_respostas.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/recordings/speach.wav" beforeDir="false" afterPath="$PROJECT_DIR$/recordings/speach.wav" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,16 +43,13 @@
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="2cvXpWr2hYp4fwgFYcakpXgw1EL" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;Python.Assistente (1).executor&quot;: &quot;Run&quot;,
     &quot;Python.Assistente.executor&quot;: &quot;Run&quot;,
     &quot;Python.__autograph_generated_filekdpt1ze_.executor&quot;: &quot;Debug&quot;,
@@ -240,9 +238,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
